@@ -100,7 +100,14 @@
       "food": "Food Material",
       "tribal": "Traditional Item",
       "cash": "Cash",
-      "materials": "Event Material"
+      "materials": "Event Material",
+      "hadiya": "Hadiya",
+      "rice": "Rice",
+      "dal": "Dal",
+      "wheat": "Wheat",
+      "saree": "Saree",
+      "dhoti": "Dhoti",
+      "gamcha": "Gamcha"
     }
   },
   "reports": {

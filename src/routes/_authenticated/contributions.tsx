@@ -1,19 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Plus, Pencil, Trash2, Download } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { PageHeader } from "@/components/PageHeader";
+import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
 import { exportToExcel } from "@/lib/excel";
+import { createFileRoute } from "@tanstack/react-router";
+import { Download, Pencil, Plus, Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/contributions")({
@@ -26,7 +26,27 @@ type Row = {
   events?: { name: string }; contributors?: { name: string; village: string | null };
 };
 
-const CATEGORIES = ["ହାଣ୍ଡିଆ", "ଚାଉଳ", "ଟଙ୍କା", "ପିଆଜ", "ରସୁଣ"] as const;
+const CATEGORIES = [
+  { id: "hadiya" },
+  { id: "rice" },
+  { id: "dal" },
+  { id: "wheat" },
+  { id: "saree" },
+  { id: "dhoti" },
+  { id: "gamcha" },
+] as const;
+
+const CATEGORY_ID_MAP: Record<string, string> = {
+  "ହାଣ୍ଡିଆ": "hadiya",
+  "ଚାଉଳ": "rice",
+  "ଡାଲି": "dal",
+  "ଗହମ": "wheat",
+  "ସାଡ଼ୀ": "saree",
+  "ଧୋତୀ": "dhoti",
+  "ଗମ୍ଚା": "gamcha",
+};
+
+const normalizeCategoryId = (value: string) => CATEGORY_ID_MAP[value] ?? value;
 const UNITS = ["kg", "piece", "liter", "bundle", "rupee"] as const;
 
 function ContributionsPage() {
@@ -39,9 +59,24 @@ function ContributionsPage() {
   const [editing, setEditing] = useState<Row | null>(null);
   const [filterEvent, setFilterEvent] = useState<string>("all");
   const [search, setSearch] = useState("");
-  const [form, setForm] = useState({
-    event_id: "", contributor_id: "", category: "food", product_name: "",
-    quantity: 1, unit: "kg", price: "", notes: "",
+  const [form, setForm] = useState<{
+    event_id: string;
+    contributor_id: string;
+    category: string;
+    product_name: string;
+    quantity: number;
+    unit: string;
+    price: string;
+    notes: string;
+  }>({
+    event_id: "",
+    contributor_id: "",
+    category: CATEGORIES[0].id,
+    product_name: "",
+    quantity: 1,
+    unit: "kg",
+    price: "",
+    notes: "",
   });
 
   const load = async () => {
@@ -60,13 +95,13 @@ function ContributionsPage() {
 
   const openNew = () => {
     setEditing(null);
-    setForm({ event_id: events[0]?.id ?? "", contributor_id: contributors[0]?.id ?? "", category: "food", product_name: "", quantity: 1, unit: "kg", price: "", notes: "" });
+    setForm({ event_id: events[0]?.id ?? "", contributor_id: contributors[0]?.id ?? "", category: CATEGORIES[0].id, product_name: "", quantity: 1, unit: "kg", price: "", notes: "" });
     setOpen(true);
   };
   const openEdit = (r: Row) => {
     setEditing(r);
     setForm({
-      event_id: r.event_id, contributor_id: r.contributor_id, category: r.category,
+      event_id: r.event_id, contributor_id: r.contributor_id, category: normalizeCategoryId(r.category),
       product_name: r.product_name, quantity: r.quantity, unit: r.unit ?? "kg",
       price: r.price?.toString() ?? "", notes: r.notes ?? "",
     });
@@ -104,7 +139,7 @@ function ContributionsPage() {
 
   const exportXls = () => exportToExcel(filtered.map((r, idx) => ({
     "SL.NO": idx + 1, Contributor: r.contributors?.name ?? "", Village: r.contributors?.village ?? "",
-    Event: r.events?.name ?? "", Category: t(`contributions.categories.${r.category}` as any, r.category),
+    Event: r.events?.name ?? "", Category: t(`contributions.categories.${normalizeCategoryId(r.category)}` as any, r.category),
     Product: r.product_name, Quantity: r.quantity, Unit: r.unit ?? "", Price: r.price ?? "", Notes: r.notes ?? "",
   })), "contributions", "Contributions");
 
@@ -151,7 +186,7 @@ function ContributionsPage() {
                 <TableRow key={r.id}>
                   <TableCell className="font-medium">{r.contributors?.name}</TableCell>
                   <TableCell>{r.events?.name}</TableCell>
-                  <TableCell>{t(`contributions.categories.${r.category}` as any, r.category)}</TableCell>
+                  <TableCell>{t(`contributions.categories.${normalizeCategoryId(r.category)}` as any, r.category)}</TableCell>
                   <TableCell>{r.product_name}</TableCell>
                   <TableCell>{r.quantity} {r.unit}</TableCell>
                   <TableCell>{r.price ? `₹${r.price}` : "—"}</TableCell>
@@ -185,7 +220,7 @@ function ContributionsPage() {
             <div><Label>{t("contributions.category")}</Label>
               <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>{CATEGORIES.map((c) => <SelectItem key={c} value={c}>{t(`contributions.categories.${c}` as any)}</SelectItem>)}</SelectContent>
+                <SelectContent>{CATEGORIES.map((c) => <SelectItem key={c.id} value={c.id}>{t(`contributions.categories.${c.id}`)}</SelectItem>)}</SelectContent>
               </Select>
             </div>
             <div><Label>{t("contributions.product")}</Label><Input value={form.product_name} onChange={(e) => setForm({ ...form, product_name: e.target.value })} /></div>
