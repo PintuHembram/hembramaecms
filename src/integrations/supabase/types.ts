@@ -14,7 +14,156 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contributions: {
+        Row: {
+          category: string
+          contributor_id: string
+          created_at: string
+          created_by: string
+          event_id: string
+          id: string
+          notes: string | null
+          price: number | null
+          product_name: string
+          quantity: number
+          unit: string | null
+        }
+        Insert: {
+          category: string
+          contributor_id: string
+          created_at?: string
+          created_by: string
+          event_id: string
+          id?: string
+          notes?: string | null
+          price?: number | null
+          product_name: string
+          quantity?: number
+          unit?: string | null
+        }
+        Update: {
+          category?: string
+          contributor_id?: string
+          created_at?: string
+          created_by?: string
+          event_id?: string
+          id?: string
+          notes?: string | null
+          price?: number | null
+          product_name?: string
+          quantity?: number
+          unit?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contributions_contributor_id_fkey"
+            columns: ["contributor_id"]
+            isOneToOne: false
+            referencedRelation: "contributors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contributions_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contributors: {
+        Row: {
+          address: string | null
+          alt_mobile: string | null
+          contribution_date: string | null
+          created_at: string
+          created_by: string
+          id: string
+          mobile: string | null
+          name: string
+          village: string | null
+        }
+        Insert: {
+          address?: string | null
+          alt_mobile?: string | null
+          contribution_date?: string | null
+          created_at?: string
+          created_by: string
+          id?: string
+          mobile?: string | null
+          name: string
+          village?: string | null
+        }
+        Update: {
+          address?: string | null
+          alt_mobile?: string | null
+          contribution_date?: string | null
+          created_at?: string
+          created_by?: string
+          id?: string
+          mobile?: string | null
+          name?: string
+          village?: string | null
+        }
+        Relationships: []
+      }
+      events: {
+        Row: {
+          created_at: string
+          created_by: string
+          event_date: string
+          event_type: string
+          host_family: string | null
+          id: string
+          location: string | null
+          name: string
+          notes: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          event_date: string
+          event_type: string
+          host_family?: string | null
+          id?: string
+          location?: string | null
+          name: string
+          notes?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          event_date?: string
+          event_type?: string
+          host_family?: string | null
+          id?: string
+          location?: string | null
+          name?: string
+          notes?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          preferred_language: string | null
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+          preferred_language?: string | null
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          preferred_language?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
