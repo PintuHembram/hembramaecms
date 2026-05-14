@@ -353,6 +353,7 @@ const resources = {
 // Initialize i18n once
 if (!i18n.isInitialized) {
   i18n
+    .use(Backend)
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
@@ -361,22 +362,19 @@ if (!i18n.isInitialized) {
       supportedLngs: ["en", "hi", "or"],
       ns: ["translation"],
       defaultNS: "translation",
-      interpolation: { 
+      interpolation: {
         escapeValue: false,
-        formatSeparator: ",",
       },
-      detection: { 
+      detection: {
         order: ["localStorage", "navigator", "htmlTag"],
         caches: ["localStorage"],
       },
       react: {
-        useSuspense: false, // Disable suspense to prevent blank screens
+        useSuspense: false,
       },
       backend: {
-        // Fallback backend configuration for static file loading
         loadPath: "/locales/{{lng}}/common.json",
       },
-      // Ensure translations are loaded synchronously from embedded resources
       load: "languageOnly",
       debug: false,
     })
