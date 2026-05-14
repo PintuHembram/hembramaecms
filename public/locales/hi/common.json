@@ -1,0 +1,120 @@
+{
+  "app": {
+    "name": "आदिवासी योगदान",
+    "tagline": "सामुदायिक कार्यक्रम रिकॉर्ड"
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "events": "कार्यक्रम",
+    "contributors": "योगदानकर्ता",
+    "contributions": "योगदान",
+    "reports": "रिपोर्ट",
+    "logout": "लॉग आउट"
+  },
+  "auth": {
+    "login": "लॉग इन",
+    "signup": "साइन अप",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "fullName": "पूरा नाम",
+    "haveAccount": "पहले से खाता है?",
+    "noAccount": "खाता नहीं है?",
+    "welcome": "वापस स्वागत है",
+    "createAccount": "अपना खाता बनाएं",
+    "loggingIn": "लॉग इन हो रहा है...",
+    "signingUp": "साइन अप हो रहा है..."
+  },
+  "common": {
+    "save": "सेव करें",
+    "cancel": "रद्द करें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "add": "जोड़ें",
+    "search": "खोजें",
+    "export": "एक्सेल निर्यात",
+    "actions": "क्रियाएं",
+    "loading": "लोड हो रहा है...",
+    "empty": "कोई रिकॉर्ड नहीं मिला",
+    "date": "तारीख",
+    "notes": "टिप्पणियाँ",
+    "confirmDelete": "क्या आप वाकई इसे हटाना चाहते हैं?",
+    "all": "सभी",
+    "back": "वापस"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "totalEvents": "कुल कार्यक्रम",
+    "totalContributors": "कुल योगदानकर्ता",
+    "totalContributions": "कुल योगदान",
+    "cashSummary": "कुल नकद",
+    "recent": "हाल के योगदान",
+    "upcoming": "आगामी कार्यक्रम"
+  },
+  "events": {
+    "title": "कार्यक्रम",
+    "new": "नया कार्यक्रम",
+    "editTitle": "कार्यक्रम संपादित करें",
+    "name": "कार्यक्रम का नाम",
+    "type": "कार्यक्रम प्रकार",
+    "date": "कार्यक्रम तिथि",
+    "location": "स्थान",
+    "host": "मेज़बान परिवार",
+    "types": {
+      "marriage": "विवाह",
+      "festival": "त्यौहार",
+      "social": "सामाजिक सभा",
+      "ceremony": "पारंपरिक समारोह",
+      "other": "अन्य"
+    }
+  },
+  "contributors": {
+    "title": "योगदानकर्ता",
+    "new": "नया योगदानकर्ता",
+    "editTitle": "योगदानकर्ता संपादित करें",
+    "name": "नाम",
+    "address": "पता",
+    "mobile": "मोबाइल नंबर",
+    "altMobile": "वैकल्पिक नंबर",
+    "village": "गाँव",
+    "contributionDate": "योगदान तिथि"
+  },
+  "contributions": {
+    "title": "योगदान",
+    "new": "योगदान जोड़ें",
+    "editTitle": "योगदान संपादित करें",
+    "event": "कार्यक्रम",
+    "contributor": "योगदानकर्ता",
+    "category": "श्रेणी",
+    "product": "वस्तु",
+    "quantity": "मात्रा",
+    "unit": "इकाई",
+    "price": "मूल्य (वैकल्पिक)",
+    "units": {
+      "kg": "किलो",
+      "piece": "पीस",
+      "liter": "लीटर",
+      "bundle": "बंडल",
+      "rupee": "₹"
+    },
+    "categories": {
+      "food": "खाद्य सामग्री",
+      "tribal": "पारंपरिक वस्तु",
+      "cash": "नकद",
+      "materials": "कार्यक्रम सामग्री"
+    }
+  },
+  "reports": {
+    "title": "रिपोर्ट",
+    "byEvent": "कार्यक्रम अनुसार",
+    "byProduct": "वस्तु अनुसार",
+    "byVillage": "गाँव अनुसार",
+    "byContributor": "योगदानकर्ता अनुसार",
+    "cash": "नकद योगदान"
+  },
+  "lang": {
+    "switch": "भाषा",
+    "en": "English",
+    "hi": "हिन्दी",
+    "or": "ଓଡ଼ିଆ"
+  }
+}

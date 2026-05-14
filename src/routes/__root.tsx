@@ -1,17 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-  Outlet,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
+    HeadContent,
+    Outlet,
+    Scripts,
+    createRootRouteWithContext,
+    useRouter,
 } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import appCss from "../styles.css?url";
-import "../lib/i18n";
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
+import i18n from "../lib/i18n";
+import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -55,12 +55,42 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
+  const [i18nReady, setI18nReady] = useState(i18n.isInitialized);
+
   useEffect(() => {
+    // Wait for i18n to be fully initialized
+    if (!i18n.isInitialized) {
+      i18n.on("initialized", () => {
+        setI18nReady(true);
+      });
+    } else {
+      setI18nReady(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!i18nReady) return;
+    
     const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
       router.invalidate();
     });
+    
     return () => subscription.unsubscribe();
-  }, [router]);
+  }, [router, i18nReady]);
+
+  // Ensure i18n is ready before rendering the main content
+  if (!i18nReady) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      </QueryClientProvider>
+    );
+  }
 
   return (
     <QueryClientProvider client={queryClient}>

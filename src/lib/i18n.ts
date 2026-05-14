@@ -1,6 +1,6 @@
 import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
+import { initReactI18next } from "react-i18next";
 
 const resources = {
   en: {
@@ -329,6 +329,7 @@ const resources = {
   },
 };
 
+// Initialize i18n once
 if (!i18n.isInitialized) {
   i18n
     .use(LanguageDetector)
@@ -337,9 +338,35 @@ if (!i18n.isInitialized) {
       resources,
       fallbackLng: "en",
       supportedLngs: ["en", "hi", "or"],
-      interpolation: { escapeValue: false },
-      detection: { order: ["localStorage", "navigator"], caches: ["localStorage"] },
+      ns: ["translation"],
+      defaultNS: "translation",
+      interpolation: { 
+        escapeValue: false,
+        formatSeparator: ",",
+      },
+      detection: { 
+        order: ["localStorage", "navigator", "htmlTag"],
+        caches: ["localStorage"],
+      },
+      react: {
+        useSuspense: false, // Disable suspense to prevent blank screens
+      },
+      backend: {
+        // Fallback backend configuration for static file loading
+        loadPath: "/locales/{{lng}}/common.json",
+      },
+      // Ensure translations are loaded synchronously from embedded resources
+      load: "languageOnly",
+      debug: false,
+    })
+    .catch((err) => {
+      console.error("i18n initialization error:", err);
     });
 }
+
+// Ensure i18n is ready before the app renders
+export const i18nReady = i18n.isInitialized 
+  ? Promise.resolve()
+  : i18n.loadNamespaces(["translation"]);
 
 export default i18n;

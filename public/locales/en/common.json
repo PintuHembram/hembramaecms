@@ -1,0 +1,120 @@
+{
+  "app": {
+    "name": "Adivasi Contributions",
+    "tagline": "Community Event Records"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "events": "Events",
+    "contributors": "Contributors",
+    "contributions": "Contributions",
+    "reports": "Reports",
+    "logout": "Log out"
+  },
+  "auth": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full name",
+    "haveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "welcome": "Welcome back",
+    "createAccount": "Create your account",
+    "loggingIn": "Logging in...",
+    "signingUp": "Signing up..."
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "export": "Export Excel",
+    "actions": "Actions",
+    "loading": "Loading...",
+    "empty": "No records found",
+    "date": "Date",
+    "notes": "Notes",
+    "confirmDelete": "Are you sure you want to delete this?",
+    "all": "All",
+    "back": "Back"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalEvents": "Total Events",
+    "totalContributors": "Total Contributors",
+    "totalContributions": "Total Contributions",
+    "cashSummary": "Total Cash",
+    "recent": "Recent Contributions",
+    "upcoming": "Upcoming Events"
+  },
+  "events": {
+    "title": "Events",
+    "new": "New Event",
+    "editTitle": "Edit Event",
+    "name": "Event Name",
+    "type": "Event Type",
+    "date": "Event Date",
+    "location": "Location",
+    "host": "Host Family",
+    "types": {
+      "marriage": "Marriage",
+      "festival": "Festival",
+      "social": "Social Gathering",
+      "ceremony": "Traditional Ceremony",
+      "other": "Other"
+    }
+  },
+  "contributors": {
+    "title": "Contributors",
+    "new": "New Contributor",
+    "editTitle": "Edit Contributor",
+    "name": "Name",
+    "address": "Address",
+    "mobile": "Mobile Number",
+    "altMobile": "Alternative Number",
+    "village": "Village",
+    "contributionDate": "Contribution Date"
+  },
+  "contributions": {
+    "title": "Contributions",
+    "new": "Add Contribution",
+    "editTitle": "Edit Contribution",
+    "event": "Event",
+    "contributor": "Contributor",
+    "category": "Category",
+    "product": "Product / Item",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "price": "Price (optional)",
+    "units": {
+      "kg": "KG",
+      "piece": "Piece",
+      "liter": "Liter",
+      "bundle": "Bundle",
+      "rupee": "₹"
+    },
+    "categories": {
+      "food": "Food Material",
+      "tribal": "Traditional Item",
+      "cash": "Cash",
+      "materials": "Event Material"
+    }
+  },
+  "reports": {
+    "title": "Reports",
+    "byEvent": "By Event",
+    "byProduct": "By Product",
+    "byVillage": "By Village",
+    "byContributor": "By Contributor",
+    "cash": "Cash Contributions"
+  },
+  "lang": {
+    "switch": "Language",
+    "en": "English",
+    "hi": "हिन्दी",
+    "or": "ଓଡ଼ିଆ"
+  }
+}

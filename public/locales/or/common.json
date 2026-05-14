@@ -1,0 +1,120 @@
+{
+  "app": {
+    "name": "ଆଦିବାସୀ ଅବଦାନ",
+    "tagline": "ସାମୁଦାୟିକ କାର୍ଯ୍ୟକ୍ରମ ରେକର୍ଡ"
+  },
+  "nav": {
+    "dashboard": "ଡ୍ୟାଶବୋର୍ଡ",
+    "events": "କାର୍ଯ୍ୟକ୍ରମ",
+    "contributors": "ଅବଦାନକାରୀ",
+    "contributions": "ଅବଦାନ",
+    "reports": "ରିପୋର୍ଟ",
+    "logout": "ଲଗ୍ ଆଉଟ୍"
+  },
+  "auth": {
+    "login": "ଲଗ୍ ଇନ୍",
+    "signup": "ସାଇନ୍ ଅପ୍",
+    "email": "ଇମେଲ୍",
+    "password": "ପାସୱର୍ଡ",
+    "fullName": "ପୂରା ନାମ",
+    "haveAccount": "ପୂର୍ବରୁ ଖାତା ଅଛି?",
+    "noAccount": "ଖାତା ନାହିଁ?",
+    "welcome": "ସ୍ୱାଗତ",
+    "createAccount": "ଆପଣଙ୍କ ଖାତା ତିଆରି କରନ୍ତୁ",
+    "loggingIn": "ଲଗ୍ ଇନ୍ ହେଉଛି...",
+    "signingUp": "ସାଇନ୍ ଅପ୍ ହେଉଛି..."
+  },
+  "common": {
+    "save": "ସେଭ୍ କରନ୍ତୁ",
+    "cancel": "ବାତିଲ୍",
+    "delete": "ଡିଲିଟ୍",
+    "edit": "ସମ୍ପାଦନା",
+    "add": "ଯୋଡ଼ନ୍ତୁ",
+    "search": "ଖୋଜନ୍ତୁ",
+    "export": "ଏକ୍ସେଲ୍ ରପ୍ତାନି",
+    "actions": "କାର୍ଯ୍ୟ",
+    "loading": "ଲୋଡ୍ ହେଉଛି...",
+    "empty": "କୌଣସି ରେକର୍ଡ ମିଳିଲା ନାହିଁ",
+    "date": "ତାରିଖ",
+    "notes": "ମନ୍ତବ୍ୟ",
+    "confirmDelete": "ଆପଣ ନିଶ୍ଚିତ ଡିଲିଟ୍ କରିବାକୁ ଚାହାଁନ୍ତି?",
+    "all": "ସମସ୍ତ",
+    "back": "ପଛକୁ"
+  },
+  "dashboard": {
+    "title": "ଡ୍ୟାଶବୋର୍ଡ",
+    "totalEvents": "ମୋଟ କାର୍ଯ୍ୟକ୍ରମ",
+    "totalContributors": "ମୋଟ ଅବଦାନକାରୀ",
+    "totalContributions": "ମୋଟ ଅବଦାନ",
+    "cashSummary": "ମୋଟ ନଗଦ",
+    "recent": "ସାମ୍ପ୍ରତିକ ଅବଦାନ",
+    "upcoming": "ଆଗାମୀ କାର୍ଯ୍ୟକ୍ରମ"
+  },
+  "events": {
+    "title": "କାର୍ଯ୍ୟକ୍ରମ",
+    "new": "ନୂଆ କାର୍ଯ୍ୟକ୍ରମ",
+    "editTitle": "କାର୍ଯ୍ୟକ୍ରମ ସମ୍ପାଦନା",
+    "name": "କାର୍ଯ୍ୟକ୍ରମ ନାମ",
+    "type": "କାର୍ଯ୍ୟକ୍ରମ ପ୍ରକାର",
+    "date": "କାର୍ଯ୍ୟକ୍ରମ ତାରିଖ",
+    "location": "ସ୍ଥାନ",
+    "host": "ହୋଷ୍ଟ ପରିବାର",
+    "types": {
+      "marriage": "ବିବାହ",
+      "festival": "ପର୍ବ",
+      "social": "ସାମାଜିକ ସଭା",
+      "ceremony": "ପାରମ୍ପରିକ ସମାରୋହ",
+      "other": "ଅନ୍ୟ"
+    }
+  },
+  "contributors": {
+    "title": "ଅବଦାନକାରୀ",
+    "new": "ନୂଆ ଅବଦାନକାରୀ",
+    "editTitle": "ଅବଦାନକାରୀ ସମ୍ପାଦନା",
+    "name": "ନାମ",
+    "address": "ଠିକଣା",
+    "mobile": "ମୋବାଇଲ୍ ନମ୍ବର",
+    "altMobile": "ବିକଳ୍ପ ନମ୍ବର",
+    "village": "ଗାଁ",
+    "contributionDate": "ଅବଦାନ ତାରିଖ"
+  },
+  "contributions": {
+    "title": "ଅବଦାନ",
+    "new": "ଅବଦାନ ଯୋଡ଼ନ୍ତୁ",
+    "editTitle": "ଅବଦାନ ସମ୍ପାଦନା",
+    "event": "କାର୍ଯ୍ୟକ୍ରମ",
+    "contributor": "ଅବଦାନକାରୀ",
+    "category": "ବର୍ଗ",
+    "product": "ସାମଗ୍ରୀ",
+    "quantity": "ପରିମାଣ",
+    "unit": "ଏକକ",
+    "price": "ମୂଲ୍ୟ (ଇଚ୍ଛାଧୀନ)",
+    "units": {
+      "kg": "କିଲୋ",
+      "piece": "ପିସ୍",
+      "liter": "ଲିଟର",
+      "bundle": "ବଣ୍ଡଲ୍",
+      "rupee": "₹"
+    },
+    "categories": {
+      "food": "ଖାଦ୍ୟ ସାମଗ୍ରୀ",
+      "tribal": "ପାରମ୍ପରିକ ସାମଗ୍ରୀ",
+      "cash": "ନଗଦ",
+      "materials": "କାର୍ଯ୍ୟକ୍ରମ ସାମଗ୍ରୀ"
+    }
+  },
+  "reports": {
+    "title": "ରିପୋର୍ଟ",
+    "byEvent": "କାର୍ଯ୍ୟକ୍ରମ ଅନୁଯାୟୀ",
+    "byProduct": "ସାମଗ୍ରୀ ଅନୁଯାୟୀ",
+    "byVillage": "ଗାଁ ଅନୁଯାୟୀ",
+    "byContributor": "ଅବଦାନକାରୀ ଅନୁଯାୟୀ",
+    "cash": "ନଗଦ ଅବଦାନ"
+  },
+  "lang": {
+    "switch": "ଭାଷା",
+    "en": "English",
+    "hi": "हिन्दी",
+    "or": "ଓଡ଼ିଆ"
+  }
+}
