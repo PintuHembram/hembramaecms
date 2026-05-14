@@ -1,10 +1,11 @@
+import { Logo } from "@/components/Logo";
+import { PageHeader } from "@/components/PageHeader";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
 import { createFileRoute } from "@tanstack/react-router";
+import { Calendar, Gift, IndianRupee, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Calendar, Users, Gift, IndianRupee } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
@@ -44,7 +45,7 @@ function Dashboard() {
 
   return (
     <div>
-      <PageHeader title={t("dashboard.title")} />
+      <PageHeader title={t("dashboard.title")} logo={<Logo size="sm" />} />
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mb-6">
         {cards.map((c) => (
           <Card key={c.label}>

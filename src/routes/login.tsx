@@ -1,13 +1,14 @@
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { Logo } from "@/components/Logo";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { supabase } from "@/integrations/supabase/client";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
@@ -57,8 +58,8 @@ function LoginPage() {
         <div className="flex justify-end mb-4"><LanguageSwitcher /></div>
         <Card>
           <CardHeader className="text-center">
-            <div className="mx-auto h-14 w-14 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mb-2">
-              A
+            <div className="mx-auto mb-2">
+              <Logo size="lg" />
             </div>
             <CardTitle className="text-2xl">{t("app.name")}</CardTitle>
             <p className="text-sm text-muted-foreground">{t("app.tagline")}</p>

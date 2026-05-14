@@ -1,20 +1,21 @@
-import { Link, useRouterState } from "@tanstack/react-router";
-import { LayoutDashboard, Calendar, Users, Gift, FileBarChart2, LogOut } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { Logo } from "@/components/Logo";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarHeader,
-  SidebarFooter,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { supabase } from "@/integrations/supabase/client";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { Calendar, FileBarChart2, Gift, LayoutDashboard, LogOut, Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function AppSidebar() {
   const { t } = useTranslation();
@@ -36,9 +37,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b border-sidebar-border">
         <div className="flex items-center gap-2 px-2 py-3">
-          <div className="h-8 w-8 rounded-md bg-sidebar-primary flex items-center justify-center text-sidebar-primary-foreground font-bold">
-            A
-          </div>
+          <Logo size="sm" />
           {!collapsed && (
             <div className="flex flex-col">
               <span className="text-sm font-semibold text-sidebar-foreground">{t("app.name")}</span>
