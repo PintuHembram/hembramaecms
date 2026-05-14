@@ -1,17 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-    HeadContent,
-    Outlet,
-    Scripts,
-    createRootRouteWithContext,
-    useRouter,
+  Outlet,
+  createRootRouteWithContext,
+  useRouter,
+  HeadContent,
+  Scripts,
 } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
+import appCss from "../styles.css?url";
+import "../lib/i18n";
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
-import i18n from "../lib/i18n";
-import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -24,8 +24,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Adivasi Event Contribution Management System" },
       { property: "og:description", content: "Multilingual community event contribution management" },
       { name: "twitter:description", content: "Multilingual community event contribution management" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8e1c138a-5fd7-4b87-a472-18de072d89f3/id-preview-26242366--a3c84da1-c065-4fda-94e1-f8b198dcbe4a.lovable.app-1778770624273.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8e1c138a-5fd7-4b87-a472-18de072d89f3/id-preview-26242366--a3c84da1-c065-4fda-94e1-f8b198dcbe4a.lovable.app-1778770624273.png" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/qZoW4rfy36Tnj9pvTsK0LijaiU52/social-images/social-1778780736057-adivasi_logo.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/qZoW4rfy36Tnj9pvTsK0LijaiU52/social-images/social-1778780736057-adivasi_logo.webp" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },
     ],
@@ -55,42 +55,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
-  const [i18nReady, setI18nReady] = useState(i18n.isInitialized);
-
   useEffect(() => {
-    // Wait for i18n to be fully initialized
-    if (!i18n.isInitialized) {
-      i18n.on("initialized", () => {
-        setI18nReady(true);
-      });
-    } else {
-      setI18nReady(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!i18nReady) return;
-    
     const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
       router.invalidate();
     });
-    
     return () => subscription.unsubscribe();
-  }, [router, i18nReady]);
-
-  // Ensure i18n is ready before rendering the main content
-  if (!i18nReady) {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading...</p>
-          </div>
-        </div>
-      </QueryClientProvider>
-    );
-  }
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
