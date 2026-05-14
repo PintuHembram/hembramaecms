@@ -281,12 +281,12 @@ Founder — Hembram IT Solutions Pvt. Ltd.
 # 📱 Follow Me On Social Media 👇
 
 🔹 YouTube Channel: Gareeb Engineer_pin2  
-🔹 Instagram: gareebengineer_pin2  
-🔹 Facebook Page: hembramitsolutionltd.in  
+🔹 Instagram: https://instagram.com/gareebengineer_pin2  
+🔹 Facebook Page: https://facebook.com/hembramitsolutionltd.in  
 🔹 GitHub: https://github.com/PintuHembram  
-🔹 LinkedIn: gareebengineer-pin2  
+🔹 LinkedIn: https://linkedin.com/in/gareebengineer-pin2  
 🔹 Blog: https://hembramit.blogspot.com  
-🔹 X (Twitter): https://x.com/Coder_Pintu
+🔹 X: https://x.com/Coder_Pintu  
 
 ---
 
