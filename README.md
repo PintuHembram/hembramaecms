@@ -273,7 +273,23 @@ This project is developed for community and cultural management purposes.
 
 # Author
 
-Developed for Tribal Community Digital Management Initiative.
+Developed by Pintu Hembram  
+Founder — Hembram IT Solutions Pvt. Ltd.
 
-```
-```
+---
+
+# 📱 Follow Me On Social Media 👇
+
+🔹 YouTube Channel: Gareeb Engineer_pin2  
+🔹 Instagram: gareebengineer_pin2  
+🔹 Facebook Page: hembramitsolutionltd.in  
+🔹 GitHub: https://github.com/PintuHembram  
+🔹 LinkedIn: gareebengineer-pin2  
+🔹 Blog: https://hembramit.blogspot.com  
+🔹 X (Twitter): https://x.com/Coder_Pintu
+
+---
+
+# ❤️ Support The Project
+
+If you like this project, please give this repository a ⭐ on GitHub and share it with others.
