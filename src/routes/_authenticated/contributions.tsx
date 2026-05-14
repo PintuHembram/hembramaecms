@@ -26,7 +26,7 @@ type Row = {
   events?: { name: string }; contributors?: { name: string; village: string | null };
 };
 
-const CATEGORIES = ["food", "tribal", "cash", "materials"] as const;
+const CATEGORIES = ["ହାଣ୍ଡିଆ", "ଚାଉଳ", "ଟଙ୍କା", "ପିଆଜ", "ରସୁଣ"] as const;
 const UNITS = ["kg", "piece", "liter", "bundle", "rupee"] as const;
 
 function ContributionsPage() {
