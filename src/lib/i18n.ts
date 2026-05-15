@@ -368,8 +368,8 @@ if (!i18n.isInitialized) {
       },
       react: { useSuspense: false },
       load: "languageOnly",
-      initImmediate: false as any,
       debug: false,
+      ...({ initImmediate: false } as Record<string, unknown>),
     });
 }
 
