@@ -350,13 +350,18 @@ const resources = {
   },
 };
 
-// Initialize i18n synchronously so translations are available on first render
+// Initialize i18n synchronously so translations are available on first render.
+// LanguageDetector relies on browser APIs (localStorage/navigator) — only attach
+// it on the client, otherwise SSR renders raw keys like "auth.login".
+const isBrowser = typeof window !== "undefined";
+
 if (!i18n.isInitialized) {
-  i18n
-    .use(LanguageDetector)
+  const instance = isBrowser ? i18n.use(LanguageDetector) : i18n;
+  instance
     .use(initReactI18next)
     .init({
       resources,
+      lng: isBrowser ? undefined : "en",
       fallbackLng: "en",
       supportedLngs: ["en", "hi", "or"],
       ns: ["translation"],
