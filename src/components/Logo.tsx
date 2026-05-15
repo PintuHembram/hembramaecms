@@ -1,10 +1,8 @@
 const sizeClasses: Record<"sm" | "md" | "lg", string> = {
   sm: "h-10 w-10",
   md: "h-14 w-14",
-  lg: "h-16 w-16",
+  lg: "h-20 w-20",
 };
-
-const logoSrc = new URL("../img/adivasi logo.png", import.meta.url).href;
 
 export function Logo({
   size = "md",
@@ -14,17 +12,16 @@ export function Logo({
   className?: string;
 }) {
   return (
-    <div className={`relative inline-flex items-center justify-center overflow-hidden rounded-3xl bg-secondary/10 text-primary shadow-sm ${sizeClasses[size]} ${className}`}>
+    <div
+      className={`relative inline-flex items-center justify-center overflow-hidden rounded-full bg-secondary/10 text-primary shadow-sm ring-1 ring-border/40 ${sizeClasses[size]} ${className}`}
+    >
       <img
-        src={logoSrc}
+        src="/adivasi-logo.png"
         alt="Adivasi Contributions logo"
-        className="absolute inset-0 h-full w-full object-contain z-10"
-        onError={(event) => {
-          const img = event.currentTarget as HTMLImageElement;
-          img.style.display = "none";
-        }}
+        className="h-full w-full object-contain"
+        loading="eager"
+        decoding="async"
       />
-      <span className="relative z-0 text-lg font-bold text-primary/90"></span>
     </div>
   );
 }
