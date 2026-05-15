@@ -350,7 +350,7 @@ const resources = {
   },
 };
 
-// Initialize i18n once
+// Initialize i18n synchronously so translations are available on first render
 if (!i18n.isInitialized) {
   i18n
     .use(LanguageDetector)
@@ -369,15 +369,11 @@ if (!i18n.isInitialized) {
       react: { useSuspense: false },
       load: "languageOnly",
       debug: false,
-    })
-    .catch((err) => {
-      console.error("i18n initialization error:", err);
+      ...({ initImmediate: false } as Record<string, unknown>),
     });
 }
 
-// Ensure i18n is ready before the app renders
-export const i18nReady = i18n.isInitialized 
-  ? Promise.resolve()
-  : i18n.loadNamespaces(["translation"]);
+export const i18nReady = Promise.resolve();
 
 export default i18n;
+
