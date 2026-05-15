@@ -36,17 +36,33 @@ const CATEGORIES = [
   { id: "gamcha" },
 ] as const;
 
+// Map any localized category label (across en/hi/or) back to the canonical id.
+// This protects against legacy rows where translated text was stored instead of the id key.
 const CATEGORY_ID_MAP: Record<string, string> = {
-  "ହାଣ୍ଡିଆ": "hadiya",
-  "ଚାଉଳ": "rice",
-  "ଡାଲି": "dal",
-  "ଗହମ": "wheat",
-  "ସାଡ଼ୀ": "saree",
-  "ଧୋତୀ": "dhoti",
-  "ଗମ୍ଚା": "gamcha",
+  // English
+  "Hadiya": "hadiya", "Rice": "rice", "Dal": "dal", "Wheat": "wheat",
+  "Saree": "saree", "Dhoti": "dhoti", "Gamcha": "gamcha",
+  "Food Material": "food", "Traditional Item": "tribal", "Cash": "cash", "Event Material": "materials",
+  // Hindi
+  "हड़िया": "hadiya", "चावल": "rice", "दाल": "dal", "गेहूं": "wheat",
+  "साड़ी": "saree", "धोती": "dhoti", "गमछा": "gamcha",
+  "खाद्य सामग्री": "food", "पारंपरिक वस्तु": "tribal", "नकद": "cash", "कार्यक्रम सामग्री": "materials",
+  // Odia
+  "ହଡିଆ": "hadiya", "ହାଣ୍ଡିଆ": "hadiya", "ଚାଉଳ": "rice", "ଡାଲି": "dal", "ଗହମ": "wheat",
+  "ସାଡ଼ୀ": "saree", "ଧୋତୀ": "dhoti", "ଗମ୍ଚା": "gamcha",
+  "ଖାଦ୍ୟ ସାମଗ୍ରୀ": "food", "ପାରମ୍ପରିକ ସାମଗ୍ରୀ": "tribal", "ନଗଦ": "cash", "କାର୍ଯ୍ୟକ୍ରମ ସାମଗ୍ରୀ": "materials",
 };
 
-const normalizeCategoryId = (value: string) => CATEGORY_ID_MAP[value] ?? value;
+const KNOWN_CATEGORY_IDS = new Set([
+  "hadiya", "rice", "dal", "wheat", "saree", "dhoti", "gamcha",
+  "food", "tribal", "cash", "materials",
+]);
+
+const normalizeCategoryId = (value: string) => {
+  if (!value) return value;
+  if (KNOWN_CATEGORY_IDS.has(value)) return value;
+  return CATEGORY_ID_MAP[value.trim()] ?? value;
+};
 const UNITS = ["kg", "piece", "liter", "bundle", "rupee"] as const;
 
 function ContributionsPage() {
