@@ -89,7 +89,7 @@ function getSchema(t: (key: string) => string) {
             if (typeof value === "string") return Number(value);
             return value;
           }, z.number({ invalid_type_error: t("validation.required") }).min(0.01, { message: t("validation.positive") })),
-          unit: z.enum(UNIT_OPTIONS as [UnitId, ...UnitId[]], {
+          unit: z.enum([...UNIT_OPTIONS] as [UnitId, ...UnitId[]], {
             errorMap: () => ({ message: t("validation.required") }),
           }),
           price: z.preprocess((value) => {
@@ -116,7 +116,7 @@ function AddContributionPage() {
   const [draftMessage, setDraftMessage] = useState<string | null>(null);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(getSchema(t)),
+    resolver: zodResolver(getSchema(t)) as unknown as import("react-hook-form").Resolver<FormValues>,
     defaultValues,
     mode: "onChange",
   });
@@ -486,7 +486,7 @@ function AddContributionPage() {
                 </Button>
                 <Button
                   type="button"
-                  onClick={onSubmit}
+                  onClick={handleSubmit(onSubmit)}
                   disabled={!isValid || isSaving}
                   className="rounded-xl bg-gradient-to-r from-emerald-600 to-violet-600 text-white shadow-lg shadow-emerald-500/20 hover:scale-[1.01] transition-transform duration-200"
                 >
@@ -497,7 +497,7 @@ function AddContributionPage() {
                   type="button"
                   variant="secondary"
                   className="rounded-xl"
-                  onClick={onSubmitAddAnother}
+                  onClick={handleSubmit(onSubmitAddAnother)}
                   disabled={!isValid || isSaving}
                 >
                   {t("contributions.actions.saveAddAnother")}

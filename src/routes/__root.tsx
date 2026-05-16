@@ -8,16 +8,11 @@ import {
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 
-<<<<<<< HEAD
-=======
 import appCss from "../styles.css?url";
-import "../lib/i18n";
+import "../i18n";
 import { I18nDebugPanel } from "@/components/I18nDebugPanel";
->>>>>>> e5e05f7b7f3cdd0391e33e0822c38c3f3933ab07
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
-import "../i18n";
-import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
