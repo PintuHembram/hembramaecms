@@ -568,10 +568,13 @@ function AddContributionPage() {
 
           <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <CardContent className="space-y-4 p-8">
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-500/10 text-slate-600 dark:text-slate-300">
+                  <StickyNote className="h-5 w-5" />
+                </span>
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">{t("contributions.page.notesSection")}</p>
-                  <h2 className="mt-1 text-lg font-semibold">{t("contributions.page.notesSection")}</h2>
+                  <h2 className="mt-0.5 text-lg font-semibold">{t("contributions.page.notesSection")}</h2>
                 </div>
               </div>
 
