@@ -295,11 +295,16 @@ function AddContributionPage() {
           <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <CardContent className="space-y-6 p-8">
               <div className="flex items-center justify-between gap-4 rounded-3xl border border-emerald-100/80 bg-emerald-50/80 px-4 py-4 text-slate-900 shadow-sm dark:border-emerald-400/20 dark:bg-slate-900/80 dark:text-slate-100">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-emerald-700 dark:text-emerald-300">{t("contributions.page.eventSection")}</p>
-                  <h2 className="mt-1 text-lg font-semibold">{t("contributions.page.eventSection")}</h2>
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-300">
+                    <CalendarDays className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-emerald-700 dark:text-emerald-300">{t("contributions.page.eventSection")}</p>
+                    <h2 className="mt-0.5 text-lg font-semibold">{t("contributions.page.eventSection")}</h2>
+                  </div>
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-2xl bg-white/90 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm dark:bg-slate-900/90 dark:text-slate-200">
+                <div className="hidden md:inline-flex items-center gap-2 rounded-2xl bg-white/90 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm dark:bg-slate-900/90 dark:text-slate-200">
                   <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                   {t("contributions.page.autoSave")}
                 </div>
