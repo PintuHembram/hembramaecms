@@ -1,4 +1,3 @@
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,7 +54,6 @@ function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary to-background p-4">
       <div className="w-full max-w-md">
-        <div className="flex justify-end mb-4"><LanguageSwitcher /></div>
         <Card>
           <CardHeader className="text-center">
             <div className="mx-auto mb-2">

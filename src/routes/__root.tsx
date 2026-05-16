@@ -10,7 +10,6 @@ import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 import "../i18n";
-import { I18nDebugPanel } from "@/components/I18nDebugPanel";
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -50,7 +49,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="or">
       <head><HeadContent /></head>
       <body>{children}<Scripts /></body>
     </html>
@@ -85,7 +84,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <Toaster />
-      <I18nDebugPanel />
     </QueryClientProvider>
   );
 }
