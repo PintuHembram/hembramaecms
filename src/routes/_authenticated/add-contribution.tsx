@@ -390,12 +390,56 @@ function AddContributionPage() {
         </section>
 
         <section className="space-y-6">
+          <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-br from-emerald-50 via-white to-violet-50 shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:shadow-none">
+            <CardContent className="space-y-5 p-6">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-300">
+                  <Sparkles className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.24em] text-amber-700 dark:text-amber-300">{t("contributions.page.summary")}</p>
+                  <h2 className="mt-0.5 text-lg font-semibold">{selectedEvent?.name ?? t("contributions.page.noEventSelected")}</h2>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div className="rounded-2xl bg-white/80 p-3 text-center shadow-sm dark:bg-slate-900/70">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-500">{t("contributions.page.totalItems")}</p>
+                  <p className="mt-1 text-2xl font-bold text-slate-900 dark:text-slate-100">{totals.count}</p>
+                </div>
+                <div className="rounded-2xl bg-white/80 p-3 text-center shadow-sm dark:bg-slate-900/70">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-500">{t("contributions.page.totalQuantity")}</p>
+                  <p className="mt-1 text-2xl font-bold text-slate-900 dark:text-slate-100">{totals.quantity.toLocaleString()}</p>
+                </div>
+                <div className="rounded-2xl bg-white/80 p-3 text-center shadow-sm dark:bg-slate-900/70">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-500">{t("contributions.page.totalValue")}</p>
+                  <p className="mt-1 flex items-center justify-center text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+                    <IndianRupee className="h-5 w-5" />{totals.value.toLocaleString()}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs font-medium text-slate-600 dark:text-slate-300">
+                  <span>{t("contributions.page.progress")}</span>
+                  <span>{progress}%</span>
+                </div>
+                <Progress value={progress} className="h-2" />
+              </div>
+            </CardContent>
+          </Card>
+
           <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <CardContent className="space-y-6 p-8">
               <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-indigo-700 dark:text-indigo-300">{t("contributions.page.itemsSection")}</p>
-                  <h2 className="mt-1 text-lg font-semibold">{t("contributions.page.itemsSection")}</h2>
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-300">
+                    <Package className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-indigo-700 dark:text-indigo-300">{t("contributions.page.itemsSection")}</p>
+                    <h2 className="mt-0.5 text-lg font-semibold">{t("contributions.page.itemsSection")} ({fields.length})</h2>
+                  </div>
                 </div>
                 <Button
                   type="button"
