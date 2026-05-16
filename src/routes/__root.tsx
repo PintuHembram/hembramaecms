@@ -71,6 +71,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <Toaster />
+      <I18nDebugPanel />
     </QueryClientProvider>
   );
 }
