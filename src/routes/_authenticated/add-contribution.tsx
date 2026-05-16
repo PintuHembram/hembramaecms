@@ -558,7 +558,8 @@ function AddContributionPage() {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               {errors.items?.message && <p className="text-sm text-destructive">{errors.items.message}</p>}
