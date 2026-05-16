@@ -453,8 +453,22 @@ function AddContributionPage() {
               </div>
 
               <div className="space-y-4">
-                {fields.map((field, index) => (
-                  <div key={field.id} className="rounded-[1.75rem] border border-slate-200/90 bg-slate-50 p-4 shadow-sm transition hover:shadow-md dark:border-slate-700/80 dark:bg-slate-900">
+                {fields.map((field, index) => {
+                  const item = watchValues.items?.[index];
+                  const subtotal = (Number(item?.quantity) || 0) * (Number(item?.price) || 0);
+                  return (
+                  <div key={field.id} className="group relative rounded-[1.75rem] border border-slate-200/90 bg-slate-50 p-4 shadow-sm transition hover:shadow-md hover:border-indigo-300 dark:border-slate-700/80 dark:bg-slate-900 animate-in fade-in slide-in-from-bottom-2">
+                    <div className="mb-3 flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+                        <Package className="h-3 w-3" />
+                        {t("contributions.page.itemNumber")}{index + 1}
+                      </span>
+                      {subtotal > 0 && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                          {t("contributions.page.subtotal")}: <IndianRupee className="h-3 w-3" />{subtotal.toLocaleString()}
+                        </span>
+                      )}
+                    </div>
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end">
                       <div className="flex-1 space-y-2">
                         <Label htmlFor={`items.${index}.category`}>{t("contributions.category")}</Label>
