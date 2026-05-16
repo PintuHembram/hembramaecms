@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 import "../lib/i18n";
+import { I18nDebugPanel } from "@/components/I18nDebugPanel";
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
 
