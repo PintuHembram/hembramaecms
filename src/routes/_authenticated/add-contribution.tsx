@@ -1,6 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, CheckCircle2, Loader2, Plus, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  CalendarDays,
+  CheckCircle2,
+  ClipboardList,
+  IndianRupee,
+  Loader2,
+  Package,
+  Plus,
+  Sparkles,
+  StickyNote,
+  Trash2,
+  User2,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -11,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/use-auth";
@@ -130,6 +144,34 @@ function AddContributionPage() {
     () => events.find((event) => event.id === watchValues.event_id),
     [events, watchValues.event_id],
   );
+
+  const totals = useMemo(() => {
+    const items = watchValues.items ?? [];
+    const count = items.length;
+    const quantity = items.reduce((sum, it) => sum + (Number(it?.quantity) || 0), 0);
+    const value = items.reduce((sum, it) => {
+      const q = Number(it?.quantity) || 0;
+      const p = Number(it?.price) || 0;
+      return sum + q * p;
+    }, 0);
+    return { count, quantity, value };
+  }, [watchValues.items]);
+
+  const progress = useMemo(() => {
+    const v = watchValues;
+    const checks = [
+      !!v.event_id,
+      !!v.event_date,
+      (v.entry_name?.length ?? 0) >= 3,
+      (v.contributor_fullName?.length ?? 0) >= 2,
+      (v.contributor_mobile?.length ?? 0) >= 10,
+      (v.contributor_village?.length ?? 0) >= 2,
+      (v.contributor_address?.length ?? 0) >= 5,
+      (v.items?.length ?? 0) >= 1 && v.items.every((it) => it.productName && Number(it.quantity) > 0),
+    ];
+    const done = checks.filter(Boolean).length;
+    return Math.round((done / checks.length) * 100);
+  }, [watchValues]);
 
   useEffect(() => {
     const loadOptions = async () => {
@@ -253,11 +295,16 @@ function AddContributionPage() {
           <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <CardContent className="space-y-6 p-8">
               <div className="flex items-center justify-between gap-4 rounded-3xl border border-emerald-100/80 bg-emerald-50/80 px-4 py-4 text-slate-900 shadow-sm dark:border-emerald-400/20 dark:bg-slate-900/80 dark:text-slate-100">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-emerald-700 dark:text-emerald-300">{t("contributions.page.eventSection")}</p>
-                  <h2 className="mt-1 text-lg font-semibold">{t("contributions.page.eventSection")}</h2>
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-300">
+                    <CalendarDays className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-emerald-700 dark:text-emerald-300">{t("contributions.page.eventSection")}</p>
+                    <h2 className="mt-0.5 text-lg font-semibold">{t("contributions.page.eventSection")}</h2>
+                  </div>
                 </div>
-                <div className="inline-flex items-center gap-2 rounded-2xl bg-white/90 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm dark:bg-slate-900/90 dark:text-slate-200">
+                <div className="hidden md:inline-flex items-center gap-2 rounded-2xl bg-white/90 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm dark:bg-slate-900/90 dark:text-slate-200">
                   <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                   {t("contributions.page.autoSave")}
                 </div>
@@ -303,10 +350,13 @@ function AddContributionPage() {
 
           <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <CardContent className="space-y-6 p-8">
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-violet-500/10 text-violet-600 dark:text-violet-300">
+                  <User2 className="h-5 w-5" />
+                </span>
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-violet-700 dark:text-violet-300">{t("contributions.page.contributorSection")}</p>
-                  <h2 className="mt-1 text-lg font-semibold">{t("contributions.page.contributorSection")}</h2>
+                  <h2 className="mt-0.5 text-lg font-semibold">{t("contributions.page.contributorSection")}</h2>
                 </div>
               </div>
 
@@ -340,12 +390,56 @@ function AddContributionPage() {
         </section>
 
         <section className="space-y-6">
+          <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-br from-emerald-50 via-white to-violet-50 shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:shadow-none">
+            <CardContent className="space-y-5 p-6">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-300">
+                  <Sparkles className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.24em] text-amber-700 dark:text-amber-300">{t("contributions.page.summary")}</p>
+                  <h2 className="mt-0.5 text-lg font-semibold">{selectedEvent?.name ?? t("contributions.page.noEventSelected")}</h2>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div className="rounded-2xl bg-white/80 p-3 text-center shadow-sm dark:bg-slate-900/70">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-500">{t("contributions.page.totalItems")}</p>
+                  <p className="mt-1 text-2xl font-bold text-slate-900 dark:text-slate-100">{totals.count}</p>
+                </div>
+                <div className="rounded-2xl bg-white/80 p-3 text-center shadow-sm dark:bg-slate-900/70">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-500">{t("contributions.page.totalQuantity")}</p>
+                  <p className="mt-1 text-2xl font-bold text-slate-900 dark:text-slate-100">{totals.quantity.toLocaleString()}</p>
+                </div>
+                <div className="rounded-2xl bg-white/80 p-3 text-center shadow-sm dark:bg-slate-900/70">
+                  <p className="text-[10px] uppercase tracking-wider text-slate-500">{t("contributions.page.totalValue")}</p>
+                  <p className="mt-1 flex items-center justify-center text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+                    <IndianRupee className="h-5 w-5" />{totals.value.toLocaleString()}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs font-medium text-slate-600 dark:text-slate-300">
+                  <span>{t("contributions.page.progress")}</span>
+                  <span>{progress}%</span>
+                </div>
+                <Progress value={progress} className="h-2" />
+              </div>
+            </CardContent>
+          </Card>
+
           <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <CardContent className="space-y-6 p-8">
               <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-indigo-700 dark:text-indigo-300">{t("contributions.page.itemsSection")}</p>
-                  <h2 className="mt-1 text-lg font-semibold">{t("contributions.page.itemsSection")}</h2>
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-300">
+                    <Package className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-indigo-700 dark:text-indigo-300">{t("contributions.page.itemsSection")}</p>
+                    <h2 className="mt-0.5 text-lg font-semibold">{t("contributions.page.itemsSection")} ({fields.length})</h2>
+                  </div>
                 </div>
                 <Button
                   type="button"
@@ -359,8 +453,22 @@ function AddContributionPage() {
               </div>
 
               <div className="space-y-4">
-                {fields.map((field, index) => (
-                  <div key={field.id} className="rounded-[1.75rem] border border-slate-200/90 bg-slate-50 p-4 shadow-sm transition hover:shadow-md dark:border-slate-700/80 dark:bg-slate-900">
+                {fields.map((field, index) => {
+                  const item = watchValues.items?.[index];
+                  const subtotal = (Number(item?.quantity) || 0) * (Number(item?.price) || 0);
+                  return (
+                  <div key={field.id} className="group relative rounded-[1.75rem] border border-slate-200/90 bg-slate-50 p-4 shadow-sm transition hover:shadow-md hover:border-indigo-300 dark:border-slate-700/80 dark:bg-slate-900 animate-in fade-in slide-in-from-bottom-2">
+                    <div className="mb-3 flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-700 dark:text-indigo-300">
+                        <Package className="h-3 w-3" />
+                        {t("contributions.page.itemNumber")}{index + 1}
+                      </span>
+                      {subtotal > 0 && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                          {t("contributions.page.subtotal")}: <IndianRupee className="h-3 w-3" />{subtotal.toLocaleString()}
+                        </span>
+                      )}
+                    </div>
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end">
                       <div className="flex-1 space-y-2">
                         <Label htmlFor={`items.${index}.category`}>{t("contributions.category")}</Label>
@@ -450,7 +558,8 @@ function AddContributionPage() {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               {errors.items?.message && <p className="text-sm text-destructive">{errors.items.message}</p>}
@@ -459,10 +568,13 @@ function AddContributionPage() {
 
           <Card className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <CardContent className="space-y-4 p-8">
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-500/10 text-slate-600 dark:text-slate-300">
+                  <StickyNote className="h-5 w-5" />
+                </span>
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">{t("contributions.page.notesSection")}</p>
-                  <h2 className="mt-1 text-lg font-semibold">{t("contributions.page.notesSection")}</h2>
+                  <h2 className="mt-0.5 text-lg font-semibold">{t("contributions.page.notesSection")}</h2>
                 </div>
               </div>
 
@@ -475,10 +587,15 @@ function AddContributionPage() {
 
           <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{t("contributions.page.readyToSave")}</p>
-                <p className="text-sm text-slate-500 dark:text-slate-400">{t("contributions.page.readyDescription")}</p>
-                {draftMessage && <p className="mt-2 text-sm text-emerald-600 dark:text-emerald-400">{draftMessage}</p>}
+              <div className="flex items-start gap-3">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-300">
+                  <ClipboardList className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{t("contributions.page.readyToSave")}</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">{t("contributions.page.readyDescription")}</p>
+                  {draftMessage && <p className="mt-2 text-sm text-emerald-600 dark:text-emerald-400">{draftMessage}</p>}
+                </div>
               </div>
               <div className="grid gap-3 sm:grid-cols-3">
                 <Button type="button" variant="outline" className="rounded-xl" onClick={onClearDraft}>
@@ -506,6 +623,27 @@ function AddContributionPage() {
             </div>
           </div>
         </section>
+      </div>
+
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-background/95 backdrop-blur-xl px-4 py-3 shadow-2xl">
+        <div className="flex items-center gap-3">
+          <div className="flex-1">
+            <p className="text-[10px] uppercase tracking-wider text-slate-500">{t("contributions.page.totalValue")}</p>
+            <p className="flex items-center text-lg font-bold text-emerald-600">
+              <IndianRupee className="h-4 w-4" />{totals.value.toLocaleString()}
+              <span className="ml-2 text-xs font-normal text-slate-500">· {totals.count} {t("contributions.page.totalItems")}</span>
+            </p>
+          </div>
+          <Button
+            type="button"
+            onClick={handleSubmit(onSubmit)}
+            disabled={!isValid || isSaving}
+            className="rounded-xl bg-gradient-to-r from-emerald-600 to-violet-600 text-white shadow-lg"
+          >
+            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+            {t("contributions.actions.save")}
+          </Button>
+        </div>
       </div>
     </div>
   );
