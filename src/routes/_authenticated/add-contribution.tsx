@@ -624,6 +624,27 @@ function AddContributionPage() {
           </div>
         </section>
       </div>
+
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-background/95 backdrop-blur-xl px-4 py-3 shadow-2xl">
+        <div className="flex items-center gap-3">
+          <div className="flex-1">
+            <p className="text-[10px] uppercase tracking-wider text-slate-500">{t("contributions.page.totalValue")}</p>
+            <p className="flex items-center text-lg font-bold text-emerald-600">
+              <IndianRupee className="h-4 w-4" />{totals.value.toLocaleString()}
+              <span className="ml-2 text-xs font-normal text-slate-500">· {totals.count} {t("contributions.page.totalItems")}</span>
+            </p>
+          </div>
+          <Button
+            type="button"
+            onClick={handleSubmit(onSubmit)}
+            disabled={!isValid || isSaving}
+            className="rounded-xl bg-gradient-to-r from-emerald-600 to-violet-600 text-white shadow-lg"
+          >
+            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+            {t("contributions.actions.save")}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
