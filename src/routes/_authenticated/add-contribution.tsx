@@ -1,6 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, CheckCircle2, Loader2, Plus, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  CalendarDays,
+  CheckCircle2,
+  ClipboardList,
+  IndianRupee,
+  Loader2,
+  Package,
+  Plus,
+  Sparkles,
+  StickyNote,
+  Trash2,
+  User2,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -11,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/use-auth";
