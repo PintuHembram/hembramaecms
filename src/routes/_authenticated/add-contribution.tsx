@@ -587,10 +587,15 @@ function AddContributionPage() {
 
           <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-xl shadow-slate-900/5 dark:border-slate-700/50 dark:bg-slate-950 dark:shadow-none">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{t("contributions.page.readyToSave")}</p>
-                <p className="text-sm text-slate-500 dark:text-slate-400">{t("contributions.page.readyDescription")}</p>
-                {draftMessage && <p className="mt-2 text-sm text-emerald-600 dark:text-emerald-400">{draftMessage}</p>}
+              <div className="flex items-start gap-3">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-300">
+                  <ClipboardList className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{t("contributions.page.readyToSave")}</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">{t("contributions.page.readyDescription")}</p>
+                  {draftMessage && <p className="mt-2 text-sm text-emerald-600 dark:text-emerald-400">{draftMessage}</p>}
+                </div>
               </div>
               <div className="grid gap-3 sm:grid-cols-3">
                 <Button type="button" variant="outline" className="rounded-xl" onClick={onClearDraft}>
