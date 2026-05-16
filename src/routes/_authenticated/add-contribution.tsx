@@ -145,6 +145,34 @@ function AddContributionPage() {
     [events, watchValues.event_id],
   );
 
+  const totals = useMemo(() => {
+    const items = watchValues.items ?? [];
+    const count = items.length;
+    const quantity = items.reduce((sum, it) => sum + (Number(it?.quantity) || 0), 0);
+    const value = items.reduce((sum, it) => {
+      const q = Number(it?.quantity) || 0;
+      const p = Number(it?.price) || 0;
+      return sum + q * p;
+    }, 0);
+    return { count, quantity, value };
+  }, [watchValues.items]);
+
+  const progress = useMemo(() => {
+    const v = watchValues;
+    const checks = [
+      !!v.event_id,
+      !!v.event_date,
+      (v.entry_name?.length ?? 0) >= 3,
+      (v.contributor_fullName?.length ?? 0) >= 2,
+      (v.contributor_mobile?.length ?? 0) >= 10,
+      (v.contributor_village?.length ?? 0) >= 2,
+      (v.contributor_address?.length ?? 0) >= 5,
+      (v.items?.length ?? 0) >= 1 && v.items.every((it) => it.productName && Number(it.quantity) > 0),
+    ];
+    const done = checks.filter(Boolean).length;
+    return Math.round((done / checks.length) * 100);
+  }, [watchValues]);
+
   useEffect(() => {
     const loadOptions = async () => {
       const [eventsResponse] = await Promise.all([
