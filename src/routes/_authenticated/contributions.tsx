@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { exportToExcel } from "@/lib/excel";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Download, Pencil, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -109,11 +109,8 @@ function ContributionsPage() {
   };
   useEffect(() => { load(); }, []);
 
-  const openNew = () => {
-    setEditing(null);
-    setForm({ event_id: events[0]?.id ?? "", contributor_id: contributors[0]?.id ?? "", category: CATEGORIES[0].id, product_name: "", quantity: 1, unit: "kg", price: "", notes: "" });
-    setOpen(true);
-  };
+  const navigate = useNavigate();
+  const openNew = () => navigate({ to: "/add-contribution" });
   const openEdit = (r: Row) => {
     setEditing(r);
     setForm({

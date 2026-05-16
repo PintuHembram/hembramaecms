@@ -39,7 +39,9 @@
     "notes": "Notes",
     "confirmDelete": "Are you sure you want to delete this?",
     "all": "All",
-    "back": "Back"
+    "back": "Back",
+    "select": "Select",
+    "loginRequired": "Login required"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -107,7 +109,43 @@
       "wheat": "Wheat",
       "saree": "Saree",
       "dhoti": "Dhoti",
-      "gamcha": "Gamcha"
+      "gamcha": "Gamcha",
+      "vegetables": "Vegetables",
+      "decoration": "Decoration Materials",
+      "others": "Others"
+    },
+    "page": {
+      "title": "Add New Contribution",
+      "subtitle": "Manage tribal community event contributions digitally.",
+      "eventSection": "Event Information",
+      "contributorSection": "Contributor Information",
+      "itemsSection": "Contribution Items",
+      "notesSection": "Notes",
+      "draftSaved": "Draft saved automatically",
+      "draftRestored": "Draft restored from your browser",
+      "autoSave": "Your draft is saved locally while you type.",
+      "eventDate": "Selected event date:",
+      "readyToSave": "Ready to save",
+      "readyDescription": "Submit the contribution once all items are complete."
+    },
+    "actions": {
+      "clearDraft": "Clear Draft",
+      "save": "Save Contribution",
+      "saveAddAnother": "Save & Add Another",
+      "addItem": "Add item",
+      "saveSuccess": "Contribution saved successfully."
+    },
+    "placeholders": {
+      "entryName": "Household contribution, food package, or ritual supply",
+      "mobile": "Enter mobile number",
+      "village": "Enter village name",
+      "address": "Enter full address",
+      "notes": "Add any additional details or remarks here..."
+    },
+    "validation": {
+      "required": "This field is required",
+      "positive": "Please enter a positive value",
+      "minItems": "Add at least one contribution item"
     }
   },
   "reports": {

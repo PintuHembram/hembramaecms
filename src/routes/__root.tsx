@@ -1,17 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-  Outlet,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
+    HeadContent,
+    Outlet,
+    Scripts,
+    createRootRouteWithContext,
+    useRouter,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 
-import appCss from "../styles.css?url";
-import "../lib/i18n";
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
+import "../i18n";
+import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -59,11 +59,25 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
+
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
       router.invalidate();
     });
     return () => subscription.unsubscribe();
+  }, [router]);
+
+  useEffect(() => {
+    const pathname = router.state.location.pathname;
+    if (pathname === "/_authenticated") {
+      router.navigate({ to: "/", replace: true });
+      return;
+    }
+
+    if (pathname.startsWith("/_authenticated/")) {
+      const redirectPath = pathname.replace("/_authenticated", "");
+      router.navigate({ to: redirectPath, replace: true });
+    }
   }, [router]);
 
   return (

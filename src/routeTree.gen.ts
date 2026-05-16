@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RedirectAddContributionRouteImport } from './routes/redirect-add-contribution'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,7 +18,13 @@ import { Route as AuthenticatedEventsRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedContributorsRouteImport } from './routes/_authenticated/contributors'
 import { Route as AuthenticatedContributionsRouteImport } from './routes/_authenticated/contributions'
+import { Route as AuthenticatedAddContributionRouteImport } from './routes/_authenticated/add-contribution'
 
+const RedirectAddContributionRoute = RedirectAddContributionRouteImport.update({
+  id: '/redirect-add-contribution',
+  path: '/redirect-add-contribution',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -59,10 +66,18 @@ const AuthenticatedContributionsRoute =
     path: '/contributions',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedAddContributionRoute =
+  AuthenticatedAddContributionRouteImport.update({
+    id: '/add-contribution',
+    path: '/add-contribution',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/redirect-add-contribution': typeof RedirectAddContributionRoute
+  '/add-contribution': typeof AuthenticatedAddContributionRoute
   '/contributions': typeof AuthenticatedContributionsRoute
   '/contributors': typeof AuthenticatedContributorsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -72,6 +87,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/redirect-add-contribution': typeof RedirectAddContributionRoute
+  '/add-contribution': typeof AuthenticatedAddContributionRoute
   '/contributions': typeof AuthenticatedContributionsRoute
   '/contributors': typeof AuthenticatedContributorsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -83,6 +100,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
+  '/redirect-add-contribution': typeof RedirectAddContributionRoute
+  '/_authenticated/add-contribution': typeof AuthenticatedAddContributionRoute
   '/_authenticated/contributions': typeof AuthenticatedContributionsRoute
   '/_authenticated/contributors': typeof AuthenticatedContributorsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -94,6 +113,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/redirect-add-contribution'
+    | '/add-contribution'
     | '/contributions'
     | '/contributors'
     | '/dashboard'
@@ -103,6 +124,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/redirect-add-contribution'
+    | '/add-contribution'
     | '/contributions'
     | '/contributors'
     | '/dashboard'
@@ -113,6 +136,8 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/login'
+    | '/redirect-add-contribution'
+    | '/_authenticated/add-contribution'
     | '/_authenticated/contributions'
     | '/_authenticated/contributors'
     | '/_authenticated/dashboard'
@@ -124,10 +149,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   LoginRoute: typeof LoginRoute
+  RedirectAddContributionRoute: typeof RedirectAddContributionRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/redirect-add-contribution': {
+      id: '/redirect-add-contribution'
+      path: '/redirect-add-contribution'
+      fullPath: '/redirect-add-contribution'
+      preLoaderRoute: typeof RedirectAddContributionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -184,10 +217,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedContributionsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/add-contribution': {
+      id: '/_authenticated/add-contribution'
+      path: '/add-contribution'
+      fullPath: '/add-contribution'
+      preLoaderRoute: typeof AuthenticatedAddContributionRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAddContributionRoute: typeof AuthenticatedAddContributionRoute
   AuthenticatedContributionsRoute: typeof AuthenticatedContributionsRoute
   AuthenticatedContributorsRoute: typeof AuthenticatedContributorsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
@@ -196,6 +237,7 @@ interface AuthenticatedRouteChildren {
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAddContributionRoute: AuthenticatedAddContributionRoute,
   AuthenticatedContributionsRoute: AuthenticatedContributionsRoute,
   AuthenticatedContributorsRoute: AuthenticatedContributorsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
@@ -211,6 +253,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   LoginRoute: LoginRoute,
+  RedirectAddContributionRoute: RedirectAddContributionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
