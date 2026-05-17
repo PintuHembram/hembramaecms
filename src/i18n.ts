@@ -177,6 +177,8 @@ if (!i18n.isInitialized) {
   });
 }
 
-export const i18nReady = Promise.resolve();
+export const i18nReady = i18n.isInitialized
+  ? Promise.resolve()
+  : new Promise<void>((resolve) => i18n.on("initialized", () => resolve()));
 
 export default i18n;
