@@ -172,11 +172,14 @@ if (!i18n.isInitialized) {
     supportedLngs: ["en"],
     ns: ["translation"],
     defaultNS: "translation",
+    initImmediate: false,
     interpolation: { escapeValue: false },
     react: { useSuspense: false },
   });
 }
 
-export const i18nReady = Promise.resolve();
+export const i18nReady = i18n.isInitialized
+  ? Promise.resolve()
+  : new Promise<void>((resolve) => i18n.on("initialized", () => resolve()));
 
 export default i18n;
