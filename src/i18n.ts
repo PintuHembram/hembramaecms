@@ -172,7 +172,6 @@ if (!i18n.isInitialized) {
     supportedLngs: ["en"],
     ns: ["translation"],
     defaultNS: "translation",
-    initImmediate: false,
     interpolation: { escapeValue: false },
     react: { useSuspense: false },
   });
