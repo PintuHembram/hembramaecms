@@ -28,7 +28,7 @@ function LoginPage() {
     setLoading(true);
     try {
       if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { error } = await supabase.signUp({
           email,
           password,
           options: {
@@ -40,7 +40,7 @@ function LoginPage() {
         toast.success("Account created. You can log in now.");
         setMode("login");
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await supabase.signInWithPassword({ email, password });
         if (error) throw error;
         navigate({ to: "/dashboard" });
       }
